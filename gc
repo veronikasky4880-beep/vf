@@ -1,0 +1,22 @@
+using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
+using OnlineCourseList.Models;
+namespace OnlineCourseList.Serialization
+{
+    public static class CourseListSerializer
+    {
+        public static void SaveToFile(string fileName, List<CourseProgress> data)
+        {
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            string json = JsonSerializer.Serialize(data, options);
+            File.WriteAllText(fileName, json);
+        }
+        public static List<CourseProgress> LoadFromFile(string fileName)
+        {
+            if (!File.Exists(fileName)) return new List<CourseProgress>();
+            string json = File.ReadAllText(fileName);
+            return JsonSerializer.Deserialize<List<CourseProgress>>(json) ?? new List<CourseProgress>();
+        }
+    }
+}

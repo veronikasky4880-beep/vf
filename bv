@@ -1,0 +1,15 @@
+using System;
+namespace OnlineCourseList.Models
+{
+    public class CourseNode
+    {
+        public CourseProgress Data { get; set; }
+        public CourseNode Prev { get; set; }
+        public CourseNode Next { get; set; }
+
+        public CourseNode(CourseProgress data)
+        {
+            Data = data ?? throw new ArgumentNullException(nameof(data), "Дані вузла не можуть бути null.");
+        }
+    }
+}
